@@ -19,20 +19,21 @@ window.addEventListener("DOMContentLoaded", () => {
         tabsContent[i].style.display = 'block';
         tabs[i].classList.add('tabheader__item_active');
     }
+
     hideTabContent();
     showTabContent();
 
     tabsParent.addEventListener('click', (event) => {
-       const target = event.target;
+        const target = event.target;
 
-       if (target && target.classList.contains('tabheader__item')) {
-           tabs.forEach((item, i) => {
-              if (target == item) {
-                  hideTabContent();
-                  showTabContent(i);
-              }
-           });
-       }
+        if (target && target.classList.contains('tabheader__item')) {
+            tabs.forEach((item, i) => {
+                if (target == item) {
+                    hideTabContent();
+                    showTabContent(i);
+                }
+            });
+        }
     });
 
     // Timer
@@ -46,11 +47,11 @@ window.addEventListener("DOMContentLoaded", () => {
             seconds = Math.floor((t / 1000) % 60);
 
         return {
-          'total' : t,
-          'days' : days,
-          'hours' : hours,
-          'minutes' : minutes,
-          'seconds' : seconds
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
         };
     }
 
@@ -93,15 +94,20 @@ window.addEventListener("DOMContentLoaded", () => {
         modal = document.querySelector('.modal'),
         modalCloseBtn = document.querySelector('[data-close]');
 
+    function openModal() {
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        document.body.style.overflow = 'hidden';
+        clearInterval(modalTimerId);
+    }
+
     modalTrigger.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            modal.classList.toggle('show');
-            document.body.style.overflow = 'hidden';
-        });
+        btn.addEventListener('click', openModal);
     });
 
     function closeModal() {
-        modal.classList.toggle('show');
+        modal.classList.add('hide');
+        modal.classList.remove('show');
         document.body.style.overflow = '';
     }
 
@@ -114,8 +120,19 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener('keydown', (e) => {
-       if (e.code === 'Escape' && modal.classList.contains('show')) {
-           closeModal();
-       }
+        if (e.code === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
     });
+
+    const modalTimerId = setTimeout(openModal, 5000);
+
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+
+    window.addEventListener('scroll', showModalByScroll);
 });
