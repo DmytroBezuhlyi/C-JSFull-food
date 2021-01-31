@@ -18,7 +18,7 @@ a {
   font-size: 18px;
   font-weight: bold;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: 0.3s all;
   outline: none; }
@@ -31,7 +31,7 @@ a {
   .btn_min {
     height: 50px; }
   .btn:hover {
-    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.3); }
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); }
 
 .container {
   max-width: 1200px;
@@ -505,7 +505,7 @@ a {
     width: 280px;
     height: 50px;
     background: #FFFFFF;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border: none;
     font-size: 18px;
     text-align: center;
@@ -515,3 +515,9 @@ a {
     display: block;
     width: 280px;
     margin: 0 auto; }
+
+.show {
+  display: block; }
+
+.hide {
+  display: none; }
